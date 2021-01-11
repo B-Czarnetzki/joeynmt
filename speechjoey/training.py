@@ -90,9 +90,15 @@ class TrainManager:
         self.ckpt_queue = queue.Queue(
             maxsize=train_config.get("keep_last_ckpts", 5))
         self.eval_metric = train_config.get("eval_metric", "bleu")
-        if self.eval_metric not in ['bleu', 'chrf', 'wer', 'cer']:
+        if self.eval_metric not in ['bleu',
+                                    'chrf',
+                                    'wer',
+                                    'cer',
+                                    'token_accuracy',
+                                    'sequence_accuracy']:
             raise ConfigurationError("Invalid setting for 'eval_metric', "
-                                     "valid options: 'bleu', 'chrf', 'wer', 'cer'.")
+                                     "valid options: 'bleu', 'chrf', 'wer', 'cer', "
+                                     "'token_accuracy', 'sequence_accuracy'.")
         self.early_stopping_metric = train_config.get("early_stopping_metric",
                                                       "eval_metric")
 
